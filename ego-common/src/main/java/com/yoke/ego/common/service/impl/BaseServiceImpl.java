@@ -1,84 +1,182 @@
 package com.yoke.ego.common.service.impl;
 
-import com.sun.prism.impl.Disposer;
-import com.yoke.ego.common.service.BaseService;
-import com.yoke.ego.common.util.InstanceUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
-/**
- * Created by Yoke on 2018/3/19
- */
-public class BaseServiceImpl<Mapper, Record, Example> implements BaseService<Record, Example> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseServiceImpl.class);
+public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseService<Record, Example> {
     @Autowired
-    private Mapper mapper;
+    public Mapper mapper;
 
-
-    public long countByExample(Object o) {
-        Object result = null;
+    @Override
+    public long countByExample(Example example) {
         try {
-            result = InstanceUtil.invokeMethod(mapper, "countByExample", (Object) null);
-        } catch (Exception e) {
-            LOGGER.info("执行方法countExample错误{}", e);
+            Method method = mapper.getClass().getDeclaredMethod("countByExample", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return Long.parseLong(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        return Long.parseLong(String.valueOf(result));
+        return 0L;
     }
 
-    public int deleteByExample(Object o) {
+    @Override
+    public int deleteByExample(Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("deleteByExample", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int deleteByPrimaryKey(Long id) {
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("deleteByPrimaryKey", id.getClass());
+            Object result = method.invoke(mapper, id);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int insert(Object o) {
+    @Override
+    public int insert(Record record) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("insert", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int insertSelective(Object o) {
+    @Override
+    public int insertSelective(Record record) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("insertSelective", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public List<Record> selectByExampleWithBLOBs(Object o) {
+    @Override
+    public List<Record> selectByExampleWithBLOBs(Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("selectByExampleWithBLOBS", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return (List<Record>)result;
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public List<Record> selectByExample(Object o) {
+    @Override
+    public List<Record> selectByExample(Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("selectByExample", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return (List<Record>)result;
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public Record selectByPrimaryKey(Long id) {
+    @Override
+    public Record selectByPrimaryKey(Integer id) {
+        try {
+            if (mapper==null)
+                System.out.println("MMMMMMPPPPPPPERRERERERERREERRERERERERE R FHGDFG SFDHF SJFH JA Y");
+            Method method = mapper.getClass().getDeclaredMethod("selectByPrimaryKey", Integer.class);
+            Object result = method.invoke(mapper, id);
+            return (Record)result;
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public int updateByExampleSelective(Object o, Object o2) {
+    @Override
+    public int updateByExampleSelective(Record record, Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByExampleSelective", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int updateByExampleWithBLOBs(Object o, Object o2) {
+    @Override
+    public int updateByExampleWithBLOBs(Record record, Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByExampleWithBLOBs", example.getClass());
+            Object result = method.invoke(mapper, example);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int updateByExample(Object o, Object o2) {
+    @Override
+    public int updateByExample(Record record, Example example) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByExample", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int updateByPrimaryKeySelective(Object o) {
+    @Override
+    public int updateByPrimaryKeySelective(Record record) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByPrimaryKeySelective", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int updateByPrimaryKeyWithBLOBs(Object o) {
+    @Override
+    public int updateByPrimaryKeyWithBLOBs(Record record) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByPrimaryKeyWithBLOBs", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public int updateByPrimaryKey(Object o) {
+    @Override
+    public int updateByPrimaryKey(Record record) {
+        try {
+            Method method = mapper.getClass().getDeclaredMethod("updateByPrimaryKey", record.getClass());
+            Object result = method.invoke(mapper, record);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }

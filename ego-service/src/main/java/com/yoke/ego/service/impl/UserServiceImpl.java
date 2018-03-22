@@ -1,10 +1,10 @@
-package com.yoke.ego.service;
+package com.yoke.ego.service.impl;
 
 import com.yoke.ego.common.mapper.UserMapper;
 import com.yoke.ego.common.pojo.User;
 import com.yoke.ego.common.pojo.UserExample;
 import com.yoke.ego.common.service.impl.BaseServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.yoke.ego.service.UserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +12,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User, UserExample> implements UserService {
-    @Autowired
-    private UserMapper userMapper;
 }

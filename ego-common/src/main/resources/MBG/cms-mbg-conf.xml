@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--数据库驱动-->
-    <context id="db_cms_mbg" defaultModelType="flat" targetRuntime="Mybatis3">
+    <context id="ego" defaultModelType="flat" targetRuntime="Mybatis3">
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>

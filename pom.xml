@@ -12,6 +12,7 @@
         <module>ego-common</module>
         <module>ego-service</module>
         <module>ego-front-web</module>
+        <module>ego-auth</module>
     </modules>
     <dependencies>
         <!--apache tool-->

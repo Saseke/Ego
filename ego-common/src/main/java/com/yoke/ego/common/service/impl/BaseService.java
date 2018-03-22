@@ -1,18 +1,16 @@
-package com.yoke.ego.common.service;
+package com.yoke.ego.common.service.impl;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * Created by Yoke on 2018/3/19
- */
-public interface BaseService<Record, Example> {
+public interface BaseService<Record,Example> {
+
     long countByExample(Example example);
 
     int deleteByExample(Example example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Record record);
 
@@ -22,7 +20,7 @@ public interface BaseService<Record, Example> {
 
     List<Record> selectByExample(Example example);
 
-    Record selectByPrimaryKey(Long id);
+    Record selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Record record, @Param("example") Example example);
 
